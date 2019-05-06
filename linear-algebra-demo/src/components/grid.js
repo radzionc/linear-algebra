@@ -16,50 +16,96 @@ const Container = styled.div`
 const MARGIN = 10
 const UNITS = 20
 
-const Grid = ({ children, size }) => {
-  const side = Math.min(size.width, size.height) - MARGIN * 2
+const getSide = ({ width, height }) => Math.min(width, height) - MARGIN * 2
+
+const getStepLen = ({ width, height }, units) => {
+  const side = Math.min(width, height) - MARGIN * 2
   const middle = side / 2
-  const stepLen = middle / UNITS
-  const steps = new Array(Math.floor(middle / stepLen))
-    .fill(0)
-    .reduce((acc, _, i) => [...acc, stepLen * (i + 1), -stepLen * (i + 1)], [])
+  return middle / units
+}
 
-  const XLines = () =>
-    steps.map((step, i) => (
-      <GridLine
-        key={i}
-        start={new Vector(middle + step, 0)}
-        end={new Vector(middle + step, side)}
-      />
-    ))
-  const YLines = () =>
-    steps.map((step, i) => (
-      <GridLine
-        key={i}
-        start={new Vector(0, middle + step)}
-        end={new Vector(side, middle + step)}
-      />
-    ))
+class Grid extends React.Component {
+  render() {
+    const { size, children, units = UNITS } = this.props
+    const side = getSide(size)
+    const middle = side / 2
+    const stepLen = middle / units
+    const steps = new Array(Math.floor(middle / stepLen))
+      .fill(0)
+      .reduce(
+        (acc, _, i) => [...acc, stepLen * (i + 1), -stepLen * (i + 1)],
+        []
+      )
 
-  return (
-    <Container>
-      <svg width={side} height={side}>
+    const XLines = () =>
+      steps.map((step, i) => (
         <GridLine
-          main
-          start={new Vector(middle, 0)}
-          end={new Vector(middle, side)}
+          key={i}
+          start={new Vector(middle + step, 0)}
+          end={new Vector(middle + step, side)}
         />
+      ))
+    const YLines = () =>
+      steps.map((step, i) => (
         <GridLine
-          main
-          start={new Vector(0, middle)}
-          end={new Vector(side, middle)}
+          key={i}
+          start={new Vector(0, middle + step)}
+          end={new Vector(side, middle + step)}
         />
-        <XLines />
-        <YLines />
-        {children}
-      </svg>
-    </Container>
-  )
+      ))
+
+    return (
+      <Container>
+        <svg width={side} height={side}>
+          <g>
+            <GridLine
+              main
+              start={new Vector(middle, 0)}
+              end={new Vector(middle, side)}
+            />
+            <GridLine
+              main
+              start={new Vector(0, middle)}
+              end={new Vector(side, middle)}
+            />
+            <XLines />
+            <YLines />
+          </g>
+          {children}
+        </svg>
+      </Container>
+    )
+  }
+
+  updateProjectToGrid = (size, units) => {
+    const step = getStepLen(size, units)
+    this.props.updateProjectToGrid(vector => {
+      // we don't have transformation method in vector class yet, so:
+      const scaled = vector.scaleBy(step)
+      const withNegatedY = new Vector(
+        scaled.components[0],
+        -scaled.components[1]
+      )
+      const middle = getSide(size) / 2
+      return withNegatedY.add(new Vector(middle, middle))
+    })
+  }
+
+  componentWillReceiveProps({ size, units }) {
+    if (this.props.updateProjectToGrid) {
+      const newStepLen = getStepLen(size, units)
+      const oldStepLen = getStepLen(this.props.size, units)
+      if (newStepLen !== oldStepLen) {
+        this.updateProjectToGrid(size, units)
+      }
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.updateProjectToGrid) {
+      this.updateProjectToGrid(this.props.size, this.props.units)
+    }
+  }
 }
 
 export default withSize({ monitorHeight: true })(Grid)
