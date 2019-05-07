@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
-import { Vector } from 'linear-algebra/vector'
+import styled from 'styled-components'
 
 import Grid from './grid'
 
@@ -28,14 +27,7 @@ const InfoContainer = styled.div`
 class Main extends React.Component {
   constructor(props) {
     super(props)
-    const { theme } = props
     this.state = {
-      oneColor: theme.color.green,
-      otherColor: theme.color.red,
-      oneName: 'v⃗',
-      otherName: 'w⃗',
-      one: new Vector(0, 5),
-      other: new Vector(6, 2),
       project: undefined
     }
   }
@@ -67,4 +59,4 @@ class Main extends React.Component {
   }
 }
 
-export default withTheme(Main)
+export default Main
