@@ -2,6 +2,7 @@
   "name": "linear-algebra-demo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rodionchachura.github.io/linear-algebra",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "linear-algebra": "file:../library",
