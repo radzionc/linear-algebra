@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/linear-algebra/precache-manifest.866adb3cefb93d066ac696c8a1006526.js"
+  "/linear-algebra/precache-manifest.ac8de680a3c7c6e5b1dfb5768d4a64a3.js"
 );
 
 self.addEventListener('message', (event) => {
