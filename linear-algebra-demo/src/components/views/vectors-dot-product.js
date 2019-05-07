@@ -14,7 +14,7 @@ const VectorsDotProduct = ({ theme }) => {
   const otherName = 'w⃗'
   const oneColor = theme.color.green
   const otherColor = theme.color.red
-  const dotProduct = one.dotProduct(other)
+  const dotProduct = one.dotProduct(other).toFixed(2)
 
   const renderInformation = () => (
     <>
