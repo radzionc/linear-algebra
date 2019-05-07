@@ -1,9 +1,8 @@
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
-import { Vector } from 'linear-algebra/vector'
+import styled from 'styled-components'
 
-import Grid from './grid'
-import Arrow from './arrow'
+import views from './views'
+import MenuItem from './menu-item'
 
 const Container = styled.div`
   width: 100%;
@@ -11,55 +10,47 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 40px;
+  flex-direction: row;
+  position: relative;
+`
+
+const Menu = styled.div`
+  position: absolute;
+  top: 40px;
+  right: 40px;
 `
 
 class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      project: undefined
+      view: Object.keys(views)[0]
     }
   }
-  render() {
-    const Content = () => {
-      const { project } = this.state
-      if (!project) return null
 
-      const one = new Vector(0, 5)
-      const other = new Vector(6, 2)
-      const sum = one.add(other)
-      const { theme } = this.props
-      return (
-        <>
-          <Arrow
-            project={project}
-            vector={one}
-            text={'v⃗'}
-            color={theme.color.green}
-          />
-          <Arrow
-            project={project}
-            vector={other}
-            text={'w⃗'}
-            color={theme.color.red}
-          />
-          <Arrow
-            project={project}
-            vector={sum}
-            text={'v⃗ + w⃗'}
-            color={theme.color.blue}
-          />
-        </>
-      )
-    }
+  render() {
+    const { view } = this.state
+    const View = views[view]
+    const viewsNames = Object.keys(views)
+    const MenuItems = () =>
+      viewsNames.map(name => (
+        <MenuItem
+          key={name}
+          selected={name === view}
+          text={name}
+          onClick={() => this.setState({ view: name })}
+        />
+      ))
     return (
       <Container>
-        <Grid cells={10} updateProject={project => this.setState({ project })}>
-          <Content />
-        </Grid>
+        <View />
+        <Menu>
+          <MenuItems />
+        </Menu>
       </Container>
     )
   }
 }
 
-export default withTheme(Main)
+export default Main
