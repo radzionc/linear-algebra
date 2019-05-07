@@ -17,33 +17,44 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      projectToGrid: undefined
+      project: undefined
     }
   }
   render() {
     const Content = () => {
-      const { projectToGrid } = this.state
-      if (!projectToGrid) return null
+      const { project } = this.state
+      if (!project) return null
 
-      const start = projectToGrid(new Vector(0, 0))
-      const one = projectToGrid(new Vector(4, 5))
-      const other = projectToGrid(new Vector(6, 2))
+      const one = new Vector(0, 5)
+      const other = new Vector(6, 2)
+      const sum = one.add(other)
       const { theme } = this.props
       return (
         <>
-          <Arrow start={start} end={one} text={'v'} color={theme.color.green} />
-          <Arrow start={start} end={other} text={'w'} color={theme.color.red} />
+          <Arrow
+            project={project}
+            vector={one}
+            text={'v⃗'}
+            color={theme.color.green}
+          />
+          <Arrow
+            project={project}
+            vector={other}
+            text={'w⃗'}
+            color={theme.color.red}
+          />
+          <Arrow
+            project={project}
+            vector={sum}
+            text={'v⃗ + w⃗'}
+            color={theme.color.blue}
+          />
         </>
       )
     }
     return (
       <Container>
-        <Grid
-          units={10}
-          updateProjectToGrid={projectToGrid =>
-            this.setState({ projectToGrid })
-          }
-        >
+        <Grid cells={10} updateProject={project => this.setState({ project })}>
           <Content />
         </Grid>
       </Container>

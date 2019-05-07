@@ -14,22 +14,21 @@ const Container = styled.div`
 `
 
 const MARGIN = 10
-const UNITS = 20
 
 const getSide = ({ width, height }) => Math.min(width, height) - MARGIN * 2
 
-const getStepLen = ({ width, height }, units) => {
-  const side = Math.min(width, height) - MARGIN * 2
+const getStepLen = ({ width, height }, cells) => {
+  const side = getSide({ width, height })
   const middle = side / 2
-  return middle / units
+  return middle / cells
 }
 
 class Grid extends React.Component {
   render() {
-    const { size, children, units = UNITS } = this.props
+    const { size, children, cells } = this.props
     const side = getSide(size)
     const middle = side / 2
-    const stepLen = middle / units
+    const stepLen = middle / cells
     const steps = new Array(Math.floor(middle / stepLen))
       .fill(0)
       .reduce(
@@ -77,9 +76,9 @@ class Grid extends React.Component {
     )
   }
 
-  updateProjectToGrid = (size, units) => {
-    const step = getStepLen(size, units)
-    this.props.updateProjectToGrid(vector => {
+  updateProject = (size, cells) => {
+    const step = getStepLen(size, cells)
+    this.props.updateProject(vector => {
       // we don't have transformation method in vector class yet, so:
       const scaled = vector.scaleBy(step)
       const withNegatedY = new Vector(
@@ -91,19 +90,19 @@ class Grid extends React.Component {
     })
   }
 
-  componentWillReceiveProps({ size, units }) {
-    if (this.props.updateProjectToGrid) {
-      const newStepLen = getStepLen(size, units)
-      const oldStepLen = getStepLen(this.props.size, units)
+  componentWillReceiveProps({ size, cells }) {
+    if (this.props.updateProject) {
+      const newStepLen = getStepLen(size, cells)
+      const oldStepLen = getStepLen(this.props.size, cells)
       if (newStepLen !== oldStepLen) {
-        this.updateProjectToGrid(size, units)
+        this.updateProject(size, cells)
       }
     }
   }
 
   componentDidMount() {
-    if (this.props.updateProjectToGrid) {
-      this.updateProjectToGrid(this.props.size, this.props.units)
+    if (this.props.updateProject) {
+      this.updateProject(this.props.size, this.props.cells)
     }
   }
 }

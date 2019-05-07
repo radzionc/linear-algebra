@@ -59,6 +59,9 @@ class Vector {
   negate() {
     return this.scaleBy(-1)
   }
+  withLength(newLength) {
+    return this.normalize().scaleBy(newLength)
+  }
   projectOn(other) {
     const normalized = other.normalize()
     return normalized.scaleBy(this.dotProduct(normalized))
