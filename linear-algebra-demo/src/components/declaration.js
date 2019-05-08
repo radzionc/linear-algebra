@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   color: ${p => p.color || p.theme.color.mainFont};
+  font-size: 24px;
   margin: 10px;
 `
 

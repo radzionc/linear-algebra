@@ -6,6 +6,7 @@ const Container = styled.div`
   flex-direction: row;
   color: ${p => p.color};
   margin: 10px;
+  font-size: 24px;
 `
 
 const TextContainer = styled.div`
@@ -51,13 +52,18 @@ const ComponentsContainer = styled.div`
   align-items: center;
 `
 
-export default ({ components, name, color }) => {
+export default ({ columns, name, color }) => {
   const Components = () =>
-    components.map((component, i) => (
-      <Component color={color} key={i}>
-        {component}
-      </Component>
+    columns.map((column, ci) => (
+      <ComponentsContainer key={ci}>
+        {column.map((component, i) => (
+          <Component color={color} key={i}>
+            {Number.isInteger(component) ? component : component.toFixed(2)}
+          </Component>
+        ))}
+      </ComponentsContainer>
     ))
+
   return (
     <Container>
       <TextContainer>
@@ -65,9 +71,7 @@ export default ({ components, name, color }) => {
       </TextContainer>
       <BracketsContainer>
         <LeftBracket color={color} />
-        <ComponentsContainer>
-          <Components />
-        </ComponentsContainer>
+        <Components />
         <RightBracket color={color} />
       </BracketsContainer>
     </Container>

@@ -4,7 +4,7 @@ import { Vector } from 'linear-algebra/vector'
 
 import GridExample from '../grid-example'
 import Arrow from '../arrow'
-import VectorView from '../vector'
+import BracketedView from '../bracketed'
 
 const VectorsAddition = ({ theme }) => {
   const i = new Vector(1, 0)
@@ -22,10 +22,10 @@ const VectorsAddition = ({ theme }) => {
 
   const renderInformation = () => (
     <>
-      <VectorView components={i.components} name={iName} color={iColor} />
-      <VectorView components={j.components} name={jName} color={jColor} />
-      <VectorView
-        components={linearCombination.components}
+      <BracketedView columns={[i.components]} name={iName} color={iColor} />
+      <BracketedView columns={[j.components]} name={jName} color={jColor} />
+      <BracketedView
+        columns={[linearCombination.components]}
         name={linearCombinationName}
         color={linearCombinationColor}
       />

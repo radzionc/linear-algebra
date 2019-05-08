@@ -4,7 +4,7 @@ import { Vector } from 'linear-algebra/vector'
 
 import GridExample from '../grid-example'
 import Arrow from '../arrow'
-import VectorView from '../vector'
+import BracketedView from '../bracketed'
 import Declaration from '../declaration'
 
 const VectorsDotProduct = ({ theme }) => {
@@ -18,9 +18,13 @@ const VectorsDotProduct = ({ theme }) => {
 
   const renderInformation = () => (
     <>
-      <VectorView components={one.components} name={oneName} color={oneColor} />
-      <VectorView
-        components={other.components}
+      <BracketedView
+        columns={[one.components]}
+        name={oneName}
+        color={oneColor}
+      />
+      <BracketedView
+        columns={[other.components]}
         name={otherName}
         color={otherColor}
       />
