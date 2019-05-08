@@ -11,5 +11,5 @@ export default {
   'vectors: length': VectorLength,
   'vectors: scale': VectorScale,
   'vectors: dot product': VectorsDotProduct,
-  'vector: linear combination': VectorLinearCombination
+  'vectors: linear combination': VectorLinearCombination
 }

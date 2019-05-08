@@ -1,4 +1,4 @@
-const { areEqual, toDegrees } = require('./utils')
+const { areEqual, toDegrees, sum } = require('./utils')
 
 class Vector {
   constructor(...components) {
@@ -68,6 +68,17 @@ class Vector {
   }
   equalTo({ components }) {
     return components.every((component, index) => areEqual(component, this.components[index]))
+  }
+  transform(matrix) {
+    const columns = matrix.columns()
+    if(columns.length !== this.components.length) {
+      throw new Error('Matrix columns length should be equal to vector components length.')
+    }
+
+    const multiplied = columns
+      .map((column, i) => column.map(c => c * this.components[i]))
+    const newComponents = multiplied[0].map((_, i) => sum(multiplied.map(column => column[i])))
+    return new Vector(...newComponents)
   }
 }
 

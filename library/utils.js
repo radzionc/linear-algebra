@@ -5,10 +5,12 @@ const areEqual = (one, other, epsilon = EPSILON) =>
 
 const toDegrees = radians => (radians * 180) / Math.PI
 const toRadians = degrees => (degrees * Math.PI) / 180
+const sum = arr => arr.reduce((acc, value) => acc + value, 0)
 
 module.exports = {
   areEqual,
   toDegrees,
-  toRadians
+  toRadians,
+  sum
 }
 
