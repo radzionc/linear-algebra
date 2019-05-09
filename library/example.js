@@ -1,15 +1,16 @@
-const { Contour } = require('./contour')
-const { Vector } = require('./vector')
 const { Matrix } = require('./matrix')
 
-const contour = new Contour([
-  new Vector(2, 2),
-  new Vector(2, 6),
-  new Vector(6, 6),
-  new Vector(6, 2)
-])
 const matrix = new Matrix(
-  [0, 1],
-  [1, 0]
+  [0,  1,  2],
+  [3,  4,  5],
+  [6,  7,  8],
+  [9, 10, 11]
 )
-console.log(contour.transform(matrix))
+console.log(matrix.transpose())
+// Matrix {
+//   rows: [
+//     [ 0, 3, 6, 9 ],
+//     [ 1, 4, 7, 10 ],
+//     [ 2, 5, 8, 11 ]
+//   ]
+// }

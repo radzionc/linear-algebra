@@ -23,13 +23,16 @@ const VectorsAddition = ({ theme }) => {
         name={oneName}
         color={oneColor}
       />
-      <Declaration text={`||v⃗|| = ${one.length().toFixed(2)}`} />
+      <Declaration left={`||${oneName}||`} right={one.length().toFixed(2)} />
       <BracketedView
         columns={[other.components]}
         name={otherName}
         color={otherColor}
       />
-      <Declaration text={`||v⃗|| = ${other.length().toFixed(2)}`} />
+      <Declaration
+        left={`||${otherName}||`}
+        right={other.length().toFixed(2)}
+      />
     </>
   )
   const renderGridContent = ({ project }) => (

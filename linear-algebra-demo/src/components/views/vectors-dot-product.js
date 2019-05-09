@@ -28,7 +28,7 @@ const VectorsDotProduct = ({ theme }) => {
         name={otherName}
         color={otherColor}
       />
-      <Declaration text={`v⃗ * w⃗ = ${dotProduct}`} />
+      <Declaration left={'v⃗ · w⃗'} right={dotProduct} />
     </>
   )
   const renderGridContent = ({ project }) => (

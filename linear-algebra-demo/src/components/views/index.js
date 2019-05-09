@@ -8,6 +8,8 @@ import { default as LTReflection } from './linear-transformation-reflection'
 import { default as LTScale } from './linear-transformation-scale'
 import { default as LTRotation } from './linear-transformation-rotation'
 import { default as LTShear } from './linear-transformation-shear'
+import { default as MM } from './matrix-multiplication'
+import { default as MMReversed } from './matrix-multiplication-reversed'
 
 export default {
   'vectors: addition': VectorsAddition,
@@ -19,5 +21,7 @@ export default {
   'linear transformation: reflection': LTReflection,
   'linear transformation: scale': LTScale,
   'linear transformation: rotation': LTRotation,
-  'linear transformation: shear': LTShear
+  'linear transformation: shear': LTShear,
+  'matrix-matrix multiplication: AB': MM,
+  'matrix-matrix multiplication: BA': MMReversed
 }
