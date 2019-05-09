@@ -1,16 +1,9 @@
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
+import { withTheme } from 'styled-components'
 
 import Text from './text'
+import ExpressionPart from './expression-part'
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: ${p => p.color};
-  margin: 10px;
-  font-size: 24px;
-`
 const Expression = ({ children, theme, color = theme.color.mainText }) => {
   const Content = () =>
     children.reduce((acc, component, i) => {
@@ -25,9 +18,9 @@ const Expression = ({ children, theme, color = theme.color.mainText }) => {
       ]
     }, [])
   return (
-    <Container>
+    <ExpressionPart>
       <Content />
-    </Container>
+    </ExpressionPart>
   )
 }
 

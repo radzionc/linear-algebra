@@ -10,6 +10,8 @@ import { default as LTRotation } from './linear-transformation-rotation'
 import { default as LTShear } from './linear-transformation-shear'
 import { default as MM } from './matrix-multiplication'
 import { default as MMReversed } from './matrix-multiplication-reversed'
+import { default as DeterminantScale } from './determinant-scale'
+import { default as DeterminantShear } from './determinant-shear'
 
 export default {
   'vectors: addition': VectorsAddition,
@@ -23,5 +25,7 @@ export default {
   'linear transformation: rotation': LTRotation,
   'linear transformation: shear': LTShear,
   'matrix-matrix multiplication: AB': MM,
-  'matrix-matrix multiplication: BA': MMReversed
+  'matrix-matrix multiplication: BA': MMReversed,
+  'determinant: scale transformation': DeterminantScale,
+  'determinant: shear transformation': DeterminantShear
 }

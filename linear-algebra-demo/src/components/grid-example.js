@@ -33,7 +33,7 @@ class Main extends React.Component {
   }
   render() {
     const { project } = this.state
-    const { renderInformation, renderGridContent } = this.props
+    const { renderInformation, renderGridContent, cells = 10 } = this.props
     const Content = () => {
       if (project && renderGridContent) {
         return renderGridContent({ project })
@@ -48,7 +48,10 @@ class Main extends React.Component {
     }
     return (
       <Container>
-        <Grid cells={10} updateProject={project => this.setState({ project })}>
+        <Grid
+          cells={cells}
+          updateProject={project => this.setState({ project })}
+        >
           <Content />
         </Grid>
         <InfoContainer>
