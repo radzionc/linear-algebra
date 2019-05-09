@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/linear-algebra/static/js/main.ed5c62dd.chunk.js",
-    "main.js.map": "/linear-algebra/static/js/main.ed5c62dd.chunk.js.map",
+    "main.js": "/linear-algebra/static/js/main.280d0457.chunk.js",
+    "main.js.map": "/linear-algebra/static/js/main.280d0457.chunk.js.map",
     "runtime~main.js": "/linear-algebra/static/js/runtime~main.420b36d7.js",
     "runtime~main.js.map": "/linear-algebra/static/js/runtime~main.420b36d7.js.map",
-    "static/js/2.a32b1e8f.chunk.js": "/linear-algebra/static/js/2.a32b1e8f.chunk.js",
-    "static/js/2.a32b1e8f.chunk.js.map": "/linear-algebra/static/js/2.a32b1e8f.chunk.js.map",
+    "static/js/2.a8eacf1f.chunk.js": "/linear-algebra/static/js/2.a8eacf1f.chunk.js",
+    "static/js/2.a8eacf1f.chunk.js.map": "/linear-algebra/static/js/2.a8eacf1f.chunk.js.map",
     "index.html": "/linear-algebra/index.html",
-    "precache-manifest.dd436c10a3346d1e9b5c00fd0ea5dca0.js": "/linear-algebra/precache-manifest.dd436c10a3346d1e9b5c00fd0ea5dca0.js",
+    "precache-manifest.69a45b6126716c03e407dba0a8426949.js": "/linear-algebra/precache-manifest.69a45b6126716c03e407dba0a8426949.js",
     "service-worker.js": "/linear-algebra/service-worker.js"
   }
 }
