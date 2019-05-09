@@ -39,6 +39,23 @@ class Matrix {
   transpose() {
     return new Matrix(...this.columns())
   }
+  determinant() {
+    if (this.rows.length !== this.rows[0].length) {
+      throw new Error('Only matrices with the same number of rows and columns are supported.')
+    }
+    if (this.rows.length === 2) {
+      return this.rows[0][0] * this.rows[1][1] - this.rows[0][1] * this.rows[1][0]
+    }
+
+    const parts = this.rows[0].map((coef, index) => {
+      const matrixRows = this.rows.slice(1).map(row => [ ...row.slice(0, index), ...row.slice(index + 1)])
+      const matrix = new Matrix(...matrixRows)
+      const result = coef * matrix.determinant()
+      return index % 2 === 0 ? result : -result
+    })
+
+    return sum(parts)
+  }
 }
 
 module.exports = {
