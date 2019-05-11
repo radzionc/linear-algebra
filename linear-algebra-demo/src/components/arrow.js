@@ -12,7 +12,7 @@ const Head = styled.polygon`
 `
 
 const Text = styled.text`
-  font-size: 24px;
+  font-size: 26px;
   fill: ${p => p.color};
 `
 

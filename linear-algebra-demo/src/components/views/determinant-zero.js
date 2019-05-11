@@ -3,6 +3,8 @@ import { Matrix } from 'linear-algebra/matrix'
 
 import DeterminantExample from '../determinant-example'
 
-const matrix = new Matrix([3, 0], [0, 2])
+const matrix = new Matrix([4, 2], [2, 1])
 
-export default () => <DeterminantExample cells={4} matrix={matrix} />
+export default () => (
+  <DeterminantExample withVectors cells={5} matrix={matrix} />
+)

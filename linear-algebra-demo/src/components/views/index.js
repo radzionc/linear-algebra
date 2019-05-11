@@ -12,6 +12,8 @@ import { default as MM } from './matrix-multiplication'
 import { default as MMReversed } from './matrix-multiplication-reversed'
 import { default as DeterminantScale } from './determinant-scale'
 import { default as DeterminantShear } from './determinant-shear'
+import { default as DeterminantNegative } from './determinant-negative'
+import { default as DeterminantZero } from './determinant-zero'
 
 export default {
   'vectors: addition': VectorsAddition,
@@ -27,5 +29,7 @@ export default {
   'matrix-matrix multiplication: AB': MM,
   'matrix-matrix multiplication: BA': MMReversed,
   'determinant: scale transformation': DeterminantScale,
-  'determinant: shear transformation': DeterminantShear
+  'determinant: shear transformation': DeterminantShear,
+  'determinant: negative': DeterminantNegative,
+  'determinant: zero': DeterminantZero
 }
