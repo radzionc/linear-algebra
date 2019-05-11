@@ -14,6 +14,7 @@ import { default as DeterminantScale } from './determinant-scale'
 import { default as DeterminantShear } from './determinant-shear'
 import { default as DeterminantNegative } from './determinant-negative'
 import { default as DeterminantZero } from './determinant-zero'
+import { default as View3D } from './3d'
 
 export default {
   'vectors: addition': VectorsAddition,
@@ -31,5 +32,6 @@ export default {
   'determinant: scale transformation': DeterminantScale,
   'determinant: shear transformation': DeterminantShear,
   'determinant: negative': DeterminantNegative,
-  'determinant: zero': DeterminantZero
+  'determinant: zero': DeterminantZero,
+  '3D': View3D
 }
