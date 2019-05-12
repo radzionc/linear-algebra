@@ -1,48 +1,23 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import * as THREE from 'three'
+import OrbitControls from 'three-orbitcontrols'
+import { Matrix } from 'linear-algebra/matrix'
+
+import {
+  getGetAnimatedColor,
+  getGetAnimatedTransformation
+} from '../../utils/animations'
+import { toMatrix4, fromMatrix4 } from '../../utils/three'
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `
 
-const hexToRgb = hex =>
-  hex
-    .replace(
-      /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-      (m, r, g, b) => '#' + r + r + g + g + b + b
-    )
-    .substring(1)
-    .match(/.{2}/g)
-    .map(x => parseInt(x, 16))
+const matrix = new Matrix([1, 2, 0], [0, 1, 0], [0, 0, 1])
 
-const rgbToHex = (r, g, b) =>
-  '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
-
-const getGetAnimatedColor = (fromColor, toColor, period = 4000) => {
-  const fromRgb = hexToRgb(fromColor)
-  const toRgb = hexToRgb(toColor)
-  const distances = fromRgb.map((fromPart, index) => {
-    const toPart = toRgb[index]
-    return fromPart <= toPart ? toPart - fromPart : 255 - fromPart + toPart
-  })
-  const start = Date.now()
-  return () => {
-    const now = Date.now()
-    const timePassed = now - start
-    if (timePassed > period) return toColor
-
-    const animatedDistance = timePassed / period
-    const rgb = fromRgb.map((fromPart, index) => {
-      const distance = distances[index]
-      const step = distance * animatedDistance
-      return Math.round((fromPart + step) % 255)
-    })
-    console.log(rgb)
-    return rgbToHex(...rgb)
-  }
-}
+const period = 5000
 
 class ThreeScene extends React.Component {
   render() {
@@ -53,9 +28,7 @@ class ThreeScene extends React.Component {
     const { width, height } = this.container.getBoundingClientRect()
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(100, width / height)
-    this.camera.position.z = 5
-    this.camera.position.x = 1
-    this.camera.position.y = 1
+    this.camera.position.set(1, 1, 4)
 
     const { theme } = this.props
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -63,20 +36,35 @@ class ThreeScene extends React.Component {
     this.renderer.setSize(width, height)
     this.container.appendChild(this.renderer.domElement)
 
-    const axes = new THREE.AxesHelper(5)
+    const initialColor = theme.color.red
+    const axes = new THREE.AxesHelper(4)
     const geometry = new THREE.BoxGeometry(1, 1, 1)
-    const edges = new THREE.EdgesGeometry(geometry)
-    this.line = new THREE.LineSegments(
-      edges,
-      new THREE.LineBasicMaterial({ color: theme.color.mainFont })
+    this.segments = new THREE.LineSegments(
+      new THREE.EdgesGeometry(geometry),
+      new THREE.LineBasicMaterial({ color: theme.color.mainText })
     )
+    this.cube = new THREE.Mesh(
+      geometry,
+      new THREE.MeshBasicMaterial({ color: initialColor })
+    )
+    this.objects = [this.cube, this.segments]
+    this.objects.forEach(obj => (obj.matrixAutoUpdate = false))
+    this.scene.add(this.cube, axes, this.segments)
+
+    this.controls = new OrbitControls(this.camera)
+
     this.getAnimatedColor = getGetAnimatedColor(
-      theme.color.red,
-      theme.color.purple
+      initialColor,
+      theme.color.blue,
+      period
     )
-    const material = new THREE.MeshBasicMaterial({ color: theme.color.red })
-    this.cube = new THREE.Mesh(geometry, material)
-    this.scene.add(this.cube, this.line, axes)
+    const fromMatrix = fromMatrix4(this.cube.matrix)
+    const toMatrix = matrix.toDimension(4)
+    this.getAnimatedTransformation = getGetAnimatedTransformation(
+      fromMatrix,
+      toMatrix,
+      period
+    )
     this.frameId = requestAnimationFrame(this.animate)
   }
 
@@ -86,11 +74,10 @@ class ThreeScene extends React.Component {
   }
 
   animate = () => {
-    this.cube.rotation.x += 0.01
-    this.cube.rotation.y += 0.01
-    this.line.rotation.x += 0.01
-    this.line.rotation.y += 0.01
+    const transformation = this.getAnimatedTransformation()
+    const matrix4 = toMatrix4(transformation)
     this.cube.material.color.set(this.getAnimatedColor())
+    this.objects.forEach(obj => obj.matrix.set(...matrix4.toArray()))
     this.renderer.render(this.scene, this.camera)
     this.frameId = window.requestAnimationFrame(this.animate)
   }

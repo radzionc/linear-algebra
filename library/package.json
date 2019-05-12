@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/RodionChachura/linear-algebra/issues"
   },
-  "homepage": "https://github.com/RodionChachura/linear-algebra#readme"
+  "homepage": "https://github.com/RodionChachura/linear-algebra#readme",
+  "dependencies": {}
 }

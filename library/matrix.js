@@ -56,6 +56,24 @@ class Matrix {
 
     return sum(parts)
   }
+  toDimension(dimension) {
+    const zeros = new Array(dimension).fill(0)
+    const newRows = zeros.map((_, i) => zeros.map((__, j) => {
+      if (this.rows[i] && this.rows[i][j] !== undefined) {
+        return this.rows[i][j]
+      }
+      return i === j ? 1 : 0
+    }))
+    return new Matrix(...newRows)
+  }
+  components() {
+    return this.rows.reduce((acc, row) => [ ...acc, ...row], [])
+  }
+  map(func) {
+    return new Matrix(
+      ...this.rows.map((row, i) => row.map((element, j) => func(element, i, j)))
+    )
+  }
 }
 
 module.exports = {
