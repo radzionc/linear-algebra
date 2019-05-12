@@ -7,10 +7,12 @@ export const getGetAnimatedColor = (fromColor, toColor, period) => {
     const toPart = toRgb[index]
     return fromPart <= toPart ? toPart - fromPart : 255 - fromPart + toPart
   })
-  const start = Date.now()
-  return () => {
+  return function() {
+    if (!this.start) {
+      this.start = Date.now()
+    }
     const now = Date.now()
-    const timePassed = now - start
+    const timePassed = now - this.start
     if (timePassed > period) return toColor
 
     const animatedDistance = timePassed / period
@@ -25,10 +27,12 @@ export const getGetAnimatedColor = (fromColor, toColor, period) => {
 
 export const getGetAnimatedTransformation = (fromMatrix, toMatrix, period) => {
   const distances = toMatrix.subtract(fromMatrix)
-  const start = Date.now()
-  return () => {
+  return function() {
+    if (!this.start) {
+      this.start = Date.now()
+    }
     const now = Date.now()
-    const timePassed = now - start
+    const timePassed = now - this.start
     if (timePassed > period) return toMatrix
 
     const animatedDistance = timePassed / period

@@ -27,6 +27,7 @@ class ThreeScene extends React.Component {
       height: 0
     }
   }
+
   render() {
     return <View ref={el => (this.view = el)} />
   }
@@ -95,7 +96,6 @@ class ThreeScene extends React.Component {
 
   componentWillReceiveProps({ size: { width, height } }) {
     if (this.state.width !== width || this.state.height !== height) {
-      console.log('HERE!')
       this.setState({ width, height })
       this.renderer.setSize(width, height)
       this.camera.aspect = width / height
@@ -104,7 +104,7 @@ class ThreeScene extends React.Component {
   }
 }
 
-const WrappedScene = withSize({ monitorHeight: true })(ThreeScene)
+const WrappedScene = withTheme(withSize({ monitorHeight: true })(ThreeScene))
 
 const Example3D = ({ matrix, renderInformation, theme }) => {
   const Information = () => {
@@ -115,7 +115,7 @@ const Example3D = ({ matrix, renderInformation, theme }) => {
   }
   return (
     <Container>
-      <WrappedScene matrix={matrix} theme={theme} />
+      <WrappedScene matrix={matrix} />
       <InfoContainer>
         <Information />
       </InfoContainer>
