@@ -14,6 +14,7 @@ import { default as DeterminantScale } from './determinant-scale'
 import { default as DeterminantShear } from './determinant-shear'
 import { default as DeterminantNegative } from './determinant-negative'
 import { default as DeterminantZero } from './determinant-zero'
+import { default as LTShear3D } from './linear-transformation-3d-shear'
 import { default as View3D } from './3d'
 
 export default {
@@ -27,6 +28,7 @@ export default {
   'linear transformation: scale': LTScale,
   'linear transformation: rotation': LTRotation,
   'linear transformation: shear': LTShear,
+  'linear transformation: shear 3D': LTShear3D,
   'matrix-matrix multiplication: AB': MM,
   'matrix-matrix multiplication: BA': MMReversed,
   'determinant: scale transformation': DeterminantScale,

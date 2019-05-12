@@ -1,28 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import Grid from './grid'
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  flex-direction: row;
-  position: relative;
-`
-
-const InfoContainer = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-`
+import Container from './example-container'
+import InfoContainer from './info-container'
 
 class Main extends React.Component {
   constructor(props) {
