@@ -11,11 +11,12 @@ import { default as LTShear } from './linear-transformation-shear'
 import { default as MM } from './matrix-multiplication'
 import { default as MMReversed } from './matrix-multiplication-reversed'
 import { default as DeterminantScale } from './determinant-scale'
+import { default as Determinant3DScale } from './determinant-3d-scale'
 import { default as DeterminantShear } from './determinant-shear'
 import { default as DeterminantNegative } from './determinant-negative'
 import { default as DeterminantZero } from './determinant-zero'
+import { default as Determinant3DZero } from './determinant-3d-zero'
 import { default as LTShear3D } from './linear-transformation-3d-shear'
-import { default as View3D } from './3d'
 
 export default {
   'vectors: addition': VectorsAddition,
@@ -32,8 +33,9 @@ export default {
   'matrix-matrix multiplication: AB': MM,
   'matrix-matrix multiplication: BA': MMReversed,
   'determinant: scale transformation': DeterminantScale,
+  'determinant: scale transformation 3D': Determinant3DScale,
   'determinant: shear transformation': DeterminantShear,
   'determinant: negative': DeterminantNegative,
   'determinant: zero': DeterminantZero,
-  '3D': View3D
+  'determinant: zero 3D': Determinant3DZero
 }
