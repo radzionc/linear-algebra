@@ -1,4 +1,4 @@
-const { sum } = require('./utils')
+const { sum, withoutElementAtIndex } = require('./utils')
 
 class Matrix {
   constructor(...rows) {
@@ -73,6 +73,31 @@ class Matrix {
     return new Matrix(
       ...this.rows.map((row, i) => row.map((element, j) => func(element, i, j)))
     )
+  }
+  minor(i, j) {
+    const newRows = withoutElementAtIndex(this.rows, i)
+      .map(row => withoutElementAtIndex(row, j))
+    
+    const matrix = new Matrix(...newRows)
+    return matrix.determinant()
+  }
+  cofactor(i, j) {
+    const sign = Math.pow(-1, i + j)
+    const minor = this.minor(i, j)
+    return sign * minor
+  }
+  adjugate() {
+    return this
+      .map((_, i, j) => this.cofactor(i, j))
+      .transpose()
+  }
+  inverse() {
+    const determinant = this.determinant()
+    if (determinant === 0) {
+      throw new Error("Determinant can't be  zero.")
+    }
+    const adjugate = this.adjugate()
+    return adjugate.scaleBy(1 / determinant)
   }
 }
 
