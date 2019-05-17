@@ -1,5 +1,5 @@
 import React from 'react'
-import { withTheme } from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import * as THREE from 'three'
 
 import {
@@ -10,6 +10,9 @@ import { toMatrix4, fromMatrix4 } from '../utils/three'
 import Container from './example-container'
 import InfoContainer from './info-container'
 import ThreeContainer from './three-container'
+import Expression from './expression'
+import InBrackets from './in-brackets'
+import Text from './text'
 
 const PERIOD = 5000
 
@@ -65,9 +68,29 @@ class View3D extends React.Component {
   }
 }
 
-const Example3D = ({ matrix, renderInformation, theme }) => {
+const Sup = styled.sup`
+  color: ${p => p.color};
+`
+
+const Example3D = ({ matrix, theme }) => {
   const Information = () => {
-    return null
+    const inverse = matrix.inverse()
+    const matrixColor = theme.color.blue
+    const inverseColor = theme.color.red
+    return (
+      <>
+        <Expression>
+          <Text color={matrixColor}>A</Text>
+          <InBrackets color={matrixColor} columns={matrix.columns()} />
+        </Expression>
+        <Expression>
+          <Text color={inverseColor}>
+            A<Sup color={inverseColor}>-1</Sup>
+          </Text>
+          <InBrackets color={inverseColor} columns={inverse.columns()} />
+        </Expression>
+      </>
+    )
   }
   const renderView = props => {
     const completeProps = { ...props, matrix, theme }
