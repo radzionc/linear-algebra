@@ -1,8 +1,8 @@
 import React from 'react'
 import { Matrix } from 'linear-algebra/matrix'
 
-import LTExample from '../linear-transformation-example'
+import Example from '../inverse-matrix-3d-example'
 
 const matrix = new Matrix([3, 0, 0], [0, 3, 0], [0, 0, 3])
 
-export default () => <LTExample matrix={matrix} />
+export default () => <Example matrix={matrix} />

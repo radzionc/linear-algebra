@@ -17,6 +17,8 @@ import { default as DeterminantNegative } from './determinant-negative'
 import { default as DeterminantZero } from './determinant-zero'
 import { default as Determinant3DZero } from './determinant-3d-zero'
 import { default as LTShear3D } from './linear-transformation-3d-shear'
+import { default as InverseShear3D } from './inverse-shear-3d'
+import { default as InverseScale3D } from './inverse-scale-3d'
 
 export default {
   'vectors: addition': VectorsAddition,
@@ -37,5 +39,7 @@ export default {
   'determinant: shear transformation': DeterminantShear,
   'determinant: negative': DeterminantNegative,
   'determinant: zero': DeterminantZero,
-  'determinant: zero 3D': Determinant3DZero
+  'determinant: zero 3D': Determinant3DZero,
+  'inverse: shear 3D': InverseShear3D,
+  'inverse: scale 3D': InverseScale3D
 }

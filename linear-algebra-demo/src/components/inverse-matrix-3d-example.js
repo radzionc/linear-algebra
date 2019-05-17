@@ -67,9 +67,6 @@ class View3D extends React.Component {
 
 const Example3D = ({ matrix, renderInformation, theme }) => {
   const Information = () => {
-    if (renderInformation) {
-      return renderInformation({ transformedColor: theme.color.blue })
-    }
     return null
   }
   const renderView = props => {
