@@ -3,6 +3,8 @@
 
 ## [Demo](https://rodionchachura.github.io/linear-algebra/)
 
+## [Medium](https://medium.com/@geekrodion/linear-algebra-with-javascript-46c289178c0)
+
 ### Run demo docally
 ```bash
 cd linear-algebra-demo
