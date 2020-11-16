@@ -1,9 +1,13 @@
-# linear-algebra
+# Linear Algebra
 > 
 
 ## [Demo](https://rodionchachura.github.io/linear-algebra/)
 
 ## [Blog post](https://geekrodion.com/blog/linear-algebra)
+
+## Technologies
+* React
+* SVG
 
 ### Run demo docally
 ```bash
