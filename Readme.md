@@ -1,7 +1,7 @@
 # Linear Algebra
 > 
 
-## [Demo](https://rodionchachura.github.io/linear-algebra/)
+## [Demo](https://radzionc.github.io/linear-algebra/)
 
 ## [Blog post](https://geekrodion.com/blog/linear-algebra)
 
